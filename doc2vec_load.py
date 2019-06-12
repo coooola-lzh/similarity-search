@@ -1,8 +1,7 @@
 #%%
-import gensim
+from callback import EpochLogger, EpochSaver
+fname = 'model/20190209_doc2vec_jp.model'
+model = gensim.models.doc2vec.Doc2Vec.load(fname)
 
-model = gensim.models.doc2vec.Doc2Vec.load('doc2vec_amz_epochs_40.model')
 #%%
-dir(model)
-#%%
-model.vocabulary
+model.docvecs[0]
