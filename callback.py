@@ -8,10 +8,10 @@ class EpochSaver(CallbackAny2Vec):
     def __init__(self, path_prefix):
         self.path_prefix = path_prefix
         self.epoch = 1
-        print('{}.model'.format(self.path_prefix))
+        print('{}.model'.format(self.path_prefix), flush=True)
     
     def on_epoch_end(self, model):
-        model.save('{}.model'.format(self.path_prefix))
+        model.save('{}.model'.format(self.path_prefix), flush=True)
         self.epoch += 1
 
 class EpochLogger(CallbackAny2Vec):
@@ -22,10 +22,10 @@ class EpochLogger(CallbackAny2Vec):
         self.time = 0
 
     def on_epoch_begin(self, model):
-        print("Epoch #{} starts".format(self.epoch))
+        print("Epoch #{} starts".format(self.epoch), flush=True)
         self.time = time.time()
     
     def on_epoch_end(self, model):
-        print("Epoch #{} ends, took {:.3f} secs".format(self.epoch, time.time() - self.time))
+        print("Epoch #{} ends, took {:.3f} secs".format(self.epoch, time.time() - self.time), flush=True)
         self.epoch += 1
         self.time = time.time()
