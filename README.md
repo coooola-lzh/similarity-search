@@ -9,3 +9,8 @@ The file to process the compressed Japanese document data, group them by urls.
 ## doc2vec_jp.py
 This script take the data processed by __process.py__, training a Doc2Vec model for it.<br/>
 For the usage, type `python doc2vec_jp.py *prefix*` to process the data with name `*prefix*`.<br/>
+
+## callback.py
+The script with 2 callback functions to trace the training process, which are __EpochSaver__ and __EpochLogger__.<br/>
+Namely, __EpochSaver__ is the callback function to save model for each epoch.<br/>
+With same idea, __EpochLogger__ is the callback function to trace the process of training, and print the elapsed time for each epoch.
