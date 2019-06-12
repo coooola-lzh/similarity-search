@@ -1,5 +1,7 @@
 # Build callback functions for the training model, to get some information about training progress.
+import time
 from gensim.models.callbacks import CallbackAny2Vec
+
 class EpochSaver(CallbackAny2Vec):
     """Callback to save model after each epoch"""
 
