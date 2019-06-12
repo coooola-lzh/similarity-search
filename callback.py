@@ -11,7 +11,7 @@ class EpochSaver(CallbackAny2Vec):
         print('{}.model'.format(self.path_prefix), flush=True)
     
     def on_epoch_end(self, model):
-        model.save('{}.model'.format(self.path_prefix), flush=True)
+        model.save('{}.model'.format(self.path_prefix))
         self.epoch += 1
 
 class EpochLogger(CallbackAny2Vec):
