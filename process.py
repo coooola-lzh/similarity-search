@@ -47,7 +47,10 @@ out_path = 'dataset/jp/' + prefix
 out_path_txt = out_path + '.txt'
 
 def cut_url(url):
-    start = url.find('http://') + len('http://')
+    if 'www.' in url:
+        start = url.find('www.') + len('www.')
+    else:
+        start = url.find('//') + len('//')
     end = url.find('co.jp') + len('co.jp')
     return url[start:end]
 
