@@ -63,7 +63,7 @@ for dire in process_dir:
         with gzip.open(data_path, 'rt', encoding='utf-8') as fin:
             for line in fin:
                 if finished_word_cnt % 1000000 == 0:
-                    print("{} words processed.".format(finished_word_cnt))
+                    print("{} words processed.".format(finished_word_cnt), flush=True)
                 url, *word = line.split()
                 url = cut_url(url)
                 if '.' not in url: continue
