@@ -13,14 +13,14 @@ process_dir = []
 assert(len(sys.argv) == 2)
 prefix = sys.argv[1]
 
-print("Import data paths with specified path prefix:{}".format(prefix), flust=True)
+print("Import data paths with specified path prefix:{}".format(prefix), flush=True)
 for dire in os.listdir('./dataset/jp/exclude_ml'):
     if dire[:len(prefix)] == prefix:
         process_dir.append(dire)
 
 # Modify the directories into complete version
 process_dir = ['dataset/jp/exclude_ml/' + d for d in process_dir]
-print("Finished importing data paths\n", flust=True)
+print("Finished importing data paths\n", flush=True)
 
 # data_path is the path of data file
 # Only process the data obtained on 20190209, as a test. 
@@ -52,7 +52,7 @@ def cut_url(url):
     return url[start:end]
 
 url2words = collections.defaultdict(list)
-print("Start merging the data files...", flust=True)
+print("Start merging the data files...", flush=True)
 t1 = time.time()
 finished_word_cnt = 0
 for dire in process_dir:
@@ -72,9 +72,9 @@ for dire in process_dir:
 
 
 t2 = time.time()
-print("Finished merging all the data with specified prefix name.\nTook {:.3f} secs, processed {} words with total {} urls.\n".format(t2 - t1, finished_word_cnt, len(url2words)), flust=True)
+print("Finished merging all the data with specified prefix name.\nTook {:.3f} secs, processed {} words with total {} urls.\n".format(t2 - t1, finished_word_cnt, len(url2words)), flush=True)
 
-print('Start to save the url-words documents.', flust=True)
+print('Start to save the url-words documents.', flush=True)
 t1 = time.time()
 with open(out_path_txt, 'w', encoding='utf-8') as f:
     i = 0
@@ -83,13 +83,13 @@ with open(out_path_txt, 'w', encoding='utf-8') as f:
         dic[url] = i
         i += 1
 t2 = time.time()
-print("Finished saving the url-words documents, took {:.3f} secs.\n".format(t2 - t1), flust=True)
+print("Finished saving the url-words documents, took {:.3f} secs.\n".format(t2 - t1), flush=True)
 # Pickle the dictionary (url 2 index) and save it.
 
-print("Start pickling the dictionary (from url to index).", flust=True)
+print("Start pickling the dictionary (from url to index).", flush=True)
 t1 = time.time()
 out_path_dic = out_path + '.dic'
 with open(out_path_dic, 'wb') as f:
     pickle.dump(dic, f)
 t2 = time.time()
-print("Finished pickling the dictionary, took {:.3f} secs\n".format(t2 - t1), flust=True)
+print("Finished pickling the dictionary, took {:.3f} secs\n".format(t2 - t1), flush=True)
