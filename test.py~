@@ -1,0 +1,9 @@
+#%%
+data_path = 'dataset/jp/2019021.txt'
+with open(data_path, 'r', encoding='utf-8') as f:
+    cnt = 0
+    for line in f:
+        if cnt > 3: break
+        url, *word = line.split()
+        print(url, word)
+        cnt += 1
