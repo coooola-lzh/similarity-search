@@ -1,4 +1,8 @@
-#%%
+# This script is to load the pre-trained doc2vec model, and url-to-index dicionary and corpus (document) datas.
+# After loading the data, doing the search with given query url and specified retrieval numbers, conduct the search, 
+# and output the similar document id, similarity, content and urls.
+
+
 from callback import EpochLogger, EpochSaver
 import gensim
 import pickle
