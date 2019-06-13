@@ -9,6 +9,7 @@ import time
 import sys
 from gensim.test.utils import get_tmpfile
 from callback import EpochLogger, EpochSaver
+from process import cut_url
 
 data_prefix = ''.join(sys.argv[1:])
 rela_path = 'dataset/jp/' + data_prefix
@@ -31,7 +32,7 @@ def read_corpus(fname, token_only=False):
             if token_only:
                 yield gensim.utils.simple_preprocess(words)
             else:
-                yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(words), [url_to_i[url]])
+                yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(words), cut_url(url))
 
 print("Start loading the corpus...", flush=True)
 t1 = time.time()

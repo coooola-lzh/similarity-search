@@ -1,4 +1,8 @@
-#%%
+# This script is to load the pre-trained doc2vec model, and url-to-index dicionary and corpus (document) datas.
+# After loading the data, doing the search with given query url and specified retrieval numbers, conduct the search, 
+# and output the similar document id, similarity, content and urls.
+
+
 from callback import EpochLogger, EpochSaver
 import gensim
 import pickle
@@ -53,6 +57,18 @@ def main():
     corpus_path = 'dataset/jp/' + prefix + '_train_corpus.lst'
     corpus = load_corpus(corpus_path)
 
+    while True:
+        query_url = input("Please input the url query you want to search with:\n")
+        if query_url not in url_to_i:
+            print("The url doesn't exist!\n")
+            continue
+        
+        topN = int(input("Please input the number of most similar results you want to get:\n"))
+        query_i = url_to_i[query_url]
+        sims = model.docvecs.most_similar([model.docvecs[query_i]], topn=topN)
+        for doc_id, sim in sims:
+            print("The similar document id is: {}, similarity is: {}, and the contents:\n".format(doc_id, sim))
+            print(' '.join(corpus[doc_id].words) + '\n\n')
     return
 
 if __name__ == '__main__':
