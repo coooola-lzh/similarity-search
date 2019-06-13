@@ -7,7 +7,7 @@ import os
 
 
 def main():
-    data_type = input('Input dic to print url to index dictionary, or txt to look at url and its words data.\n')
+    data_type = input('Input "dic" to print url to index dictionary, or "txt" to look at url and its words data.\n')
     if data_type != 'dic' and data_type != 'txt': 
         print('Input error!\n')
         return
