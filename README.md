@@ -21,4 +21,4 @@ The needed arguments are __1.type of the file__, `txt` or `dic`, __2.date of dat
 As a example usage, you type `python3 glimpse.py`, then follow the input prompts.
 
 ## run.sh
-A shell script for running programs by `slurm``.
+A shell script for running programs by `slurm`.
