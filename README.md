@@ -19,3 +19,6 @@ With same idea, __EpochLogger__ is the callback function to trace the process of
 This script is to have a glimpse at the processed data file, say, url-to-index dictionary or url-words pairs document data.<br/>
 The needed arguments are __1.type of the file__, `txt` or `dic`, __2.date of data collected__, for example, `20190209`, which means all the data collected on Feb.9th of 2019. It's also a representation of the data path. __3.number of instances to check__, which means how many instances you want to look at.<br/>
 As a example usage, you type `python3 glimpse.py`, then follow the input prompts.
+
+## run.sh
+A shell script for running programs by `slurm``.
