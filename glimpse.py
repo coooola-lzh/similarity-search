@@ -14,7 +14,7 @@ def main():
 
     date = input("Input the collected date of the data, as the prefix of the data file name\n")
     path = 'dataset/jp/' + date + '.' + data_type
-    if not os.path.isdir(path):
+    if not os.path.exists(path):
         print("The path doesn't exist!")
         return
 
