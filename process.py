@@ -51,7 +51,10 @@ def cut_url(url):
         start = url.find('www.') + len('www.')
     else:
         start = url.find('//') + len('//')
-    end = url.find('co.jp') + len('co.jp')
+    if 'co.jp' in url:
+        end = url.find('co.jp') + len('co.jp')
+    else:
+        end = url.find('.jp') + len('.jp')
     return url[start:end]
 
 url2words = collections.defaultdict(list)
