@@ -7,8 +7,12 @@ def cut_url(url):
         start = url.find('//') + len('//')
     if 'co.jp' in url:
         end = url.find('co.jp') + len('co.jp')
-    else:
+    elif '.jp' in url:
         end = url.find('.jp') + len('.jp')
+    elif '.com' in url:
+        end = url.find('.com') + len('.com')
+    else:
+        end = len(url)
     return url[start:end]
 
 def main():

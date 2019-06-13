@@ -67,7 +67,7 @@ def main():
         query_i = url_to_i[query_url]
         sims = model.docvecs.most_similar([model.docvecs[query_i]], topn=topN)
         for doc_id, sim in sims:
-            print("The similar document id is: {}, similarity is: {}, and the contents:\n".format(doc_id, sim))
+            print("The similar document url is: {}, similarity is: {}, and the contents:\n".format(corpus[doc_id].tags, sim))
             print(' '.join(corpus[doc_id].words) + '\n\n')
     return
 

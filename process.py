@@ -11,7 +11,8 @@ import collections
 from url import cut_url
 
 process_dir = []
-assert(len(sys.argv) == 2)
+
+
 prefix = sys.argv[1]
 
 print("Import data paths with specified path prefix:{}".format(prefix), flush=True)
@@ -63,7 +64,7 @@ for dire in process_dir:
                     print("{} words processed.".format(finished_word_cnt), flush=True)
                 url, *word = line.split()
                 url = cut_url(url)
-                if '.' not in url: continue
+                if '.' not in url and len(sys.argv) < 3: continue
                 url2words[url] += word
                 finished_word_cnt += len(word)
 
