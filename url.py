@@ -13,7 +13,7 @@ def cut_url(url):
 
 def main():
     url = input()
-    print(cut_url)
+    print(cut_url(url))
 
 if __name__ == '__main__':
     main()
