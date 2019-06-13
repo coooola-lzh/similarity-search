@@ -44,7 +44,7 @@ def main():
     
     prefix = input('Please input the date in which data are collected:\n')
     
-    model_path = prefix + '_doc2vec_jp.model'
+    model_path = 'model/' + prefix + '_doc2vec_jp.model'
     model = load_model(model_path)
 
     dic_path = 'dataset/jp/' + prefix + '.dic'
