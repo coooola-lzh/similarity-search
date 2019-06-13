@@ -8,6 +8,7 @@ import pickle
 import sys
 import time
 import collections
+from url import cut_url
 
 process_dir = []
 assert(len(sys.argv) == 2)
@@ -46,16 +47,6 @@ prev_url, index = None, 0
 out_path = 'dataset/jp/' + prefix
 out_path_txt = out_path + '.txt'
 
-def cut_url(url):
-    if 'www.' in url:
-        start = url.find('www.') + len('www.')
-    else:
-        start = url.find('//') + len('//')
-    if 'co.jp' in url:
-        end = url.find('co.jp') + len('co.jp')
-    else:
-        end = url.find('.jp') + len('.jp')
-    return url[start:end]
 
 url2words = collections.defaultdict(list)
 print("Start merging the data files...", flush=True)

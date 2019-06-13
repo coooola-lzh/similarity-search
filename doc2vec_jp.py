@@ -9,7 +9,7 @@ import time
 import sys
 from gensim.test.utils import get_tmpfile
 from callback import EpochLogger, EpochSaver
-from process import cut_url
+from url import cut_url
 
 data_prefix = ''.join(sys.argv[1:])
 rela_path = 'dataset/jp/' + data_prefix
