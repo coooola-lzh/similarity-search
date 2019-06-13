@@ -32,7 +32,7 @@ def read_corpus(fname, token_only=False):
             if token_only:
                 yield gensim.utils.simple_preprocess(words)
             else:
-                yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(words), cut_url(url))
+                yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(words), url)
 
 print("Start loading the corpus...", flush=True)
 t1 = time.time()
