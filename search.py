@@ -25,7 +25,7 @@ def load_dic(path):
         print("the path of dictionary doesn't exist!\n")
         raise FileExistsError
     t1 = time.time()
-    print("Start loading the url-to-index dictionary...")
+    print("Start loading the dictionary...")
     with open(path, 'rb') as f:
         dic = pickle.load(f)
     t2 = time.time()
@@ -54,6 +54,9 @@ def main():
     dic_path = 'dataset/jp/' + prefix + '.dic'
     url_to_i = load_dic(dic_path)
 
+    dic_rev_path = 'dataset/jp/' + prefix + '_.dic'
+    i_to_url = load_dic(dic_rev_path)
+
     corpus_path = 'dataset/jp/' + prefix + '_train_corpus.lst'
     corpus = load_corpus(corpus_path)
 
@@ -67,10 +70,8 @@ def main():
         query_i = url_to_i[query_url]
         sims = model.docvecs.most_similar([model.docvecs[query_i]], topn=topN)
         for doc_id, sim in sims:
-            #print(doc_id, sim)
-            #print('\n')
-            #print("The similar document url is: {}, similarity is: {}, and the contents:\n".format(corpus[int(doc_id)].tags[0], sim))
-            #print(' '.join(corpus[doc_id].words) + '\n\n')
+            print("The similar document url is: {}, similarity is: {}, and the contents:\n".format(i_to_url[doc_id], sim))
+            print(' '.join(corpus[doc_id].words) + '\n\n')
             print(doc_id, sim)
     return
 
