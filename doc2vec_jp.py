@@ -9,7 +9,7 @@ import time
 import sys
 from gensim.test.utils import get_tmpfile
 from callback import EpochLogger, EpochSaver
-from url import cut_url
+
 
 data_prefix = ''.join(sys.argv[1:])
 rela_path = 'dataset/jp/' + data_prefix
@@ -26,19 +26,26 @@ print('Finished loading dictionary, took {:.3f} secs\n'.format(t2 - t1), flush=T
 
 def read_corpus(fname, token_only=False):
     with smart_open.open(fname, encoding='utf-8') as f:
+        i = 0
         for line in f:
             url, *words = line.split()
             words = ' '.join(words)
             if token_only:
                 yield gensim.utils.simple_preprocess(words)
             else:
-                yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(words), url)
+                yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(words), [i])
+                i += 1
 
 print("Start loading the corpus...", flush=True)
 t1 = time.time()
 train_corpus = list(read_corpus(text_path))
 t2 = time.time()
 print("Finished loading the corpus, took {:.3f} secs".format(t2 - t1), flush=True)
+print("The first 10 data of corpus are:\n")
+for i in range(10):
+    print(train_corpus[i], '\n')
+
+
 total_word_cnt = sum([len(doc.words) for doc in train_corpus])
 print("The corpus has {} instances in total, {} words\n".format(len(train_corpus), total_word_cnt), flush=True)
 
@@ -47,12 +54,12 @@ print("The corpus has {} instances in total, {} words\n".format(len(train_corpus
 
 
 
-# Build a Doc2Vec model with Japanese text data crwaled on 2019/02/1X
+# Build a Doc2Vec model with Japanese text data crwaled on specified date.
 epoch_logger = EpochLogger()
 epoch_saver = EpochSaver('model/{}_doc2vec_jp'.format(data_prefix))
 
 print("Start to train the model...", flush=True)
-model = gensim.models.doc2vec.Doc2Vec(vector_size=100, min_count=5, epochs=20, callbacks=[epoch_logger, epoch_saver])
+model = gensim.models.doc2vec.Doc2Vec(vector_size=100, min_count=5, epochs=5, callbacks=[epoch_logger, epoch_saver])
 model.build_vocab(train_corpus)
 
 t1 = time.time()
@@ -60,8 +67,7 @@ model.train(train_corpus, total_examples=model.corpus_count, epochs=model.epochs
 t2 = time.time()
 print("Finished training, took {:.3f} secs\n".format(t2 - t1), flush=True)
 
-# model.save('doc2vec_jp_20190209_epoch20.model')
-# Dump the corpus, save it as a list.
+# Save the corpus as a list.
 t1 = time.time()
 print("Start to pickle the training corpus.", flush=True)
 
