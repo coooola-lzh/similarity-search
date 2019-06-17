@@ -59,7 +59,7 @@ epoch_logger = EpochLogger()
 epoch_saver = EpochSaver('model/{}_doc2vec_jp'.format(data_prefix))
 
 print("Start to train the model...", flush=True)
-model = gensim.models.doc2vec.Doc2Vec(vector_size=100, min_count=5, epochs=5, callbacks=[epoch_logger, epoch_saver])
+model = gensim.models.doc2vec.Doc2Vec(vector_size=100, min_count=5, epochs=20, callbacks=[epoch_logger, epoch_saver])
 model.build_vocab(train_corpus)
 
 t1 = time.time()
