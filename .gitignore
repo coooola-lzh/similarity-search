@@ -1,6 +1,0 @@
-*.model
-*.npy
-**/dataset
-make_10k_lines_data.py
-mix_data.py
-doc2vec.script.py
