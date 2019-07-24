@@ -23,9 +23,9 @@ data = 'url_text.dat'
 
 def read_corpus(fname):
     with smart_open.open(fname, encoding='utf-8') as f:
+        i = 0
         if i and i % 10 == 0:
             print('Finished loading {} docs.\n'.format(i))
-        i = 0
         for line in f:
             url, *text = line.split()
             text = ''.join(text)
