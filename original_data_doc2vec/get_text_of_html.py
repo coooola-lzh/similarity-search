@@ -4,7 +4,7 @@ def get_text_of_html(doc):
     """ 
     This function is for extracting text content from an HTML string.
     Input: HTML style string.
-    Outpu: Extracted text content string.
+    Output: Extracted text content string.
     """
     
     soup = BeautifulSoup(doc, features='lxml')
