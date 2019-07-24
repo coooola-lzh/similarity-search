@@ -4,10 +4,10 @@
 import gensim
 import os
 import smart_open
-import random
 import pickle
 import time 
 import sys
+import urllib3
 
 # Expand path for imported python modules
 sys.path.append('..')
@@ -28,10 +28,12 @@ def read_corpus(fname):
             if i and i % 10 == 0:
                 print('Finished loading {} docs.\n'.format(i), flush=True)
             url, *text = line.split()
+            url = urllib3.util.parse_url(url).hostname
             text = ''.join(text)
             url_to_i[url], i_to_url[i]= i, url
             yield gensim.models.doc2vec.TaggedDocument(split_words(text), [i])
             i += 1
+            if i > 10: break
 
 def main():
     # Load corpus and build url-to-index, index-to-url dictionaries.
