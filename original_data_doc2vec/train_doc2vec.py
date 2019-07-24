@@ -8,11 +8,15 @@ import random
 import pickle
 import time 
 import sys
+
+# Expand path for imported python modules
+sys.path.append('..')
+print(sys.path)
+
 from callback import EpochLogger, EpochSaver
 from split_words import split_words
 
-# Expand path for imported python modules
-sys.path.append('../')
+
 
 
 url_to_i, i_to_url  = {}, {}
