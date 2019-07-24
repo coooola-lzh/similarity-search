@@ -33,7 +33,6 @@ def read_corpus(fname):
             url_to_i[url], i_to_url[i]= i, url
             yield gensim.models.doc2vec.TaggedDocument(split_words(text), [i])
             i += 1
-            if i > 10: break
 
 def main():
     # Load corpus and build url-to-index, index-to-url dictionaries.
