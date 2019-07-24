@@ -9,7 +9,7 @@ t = Tokenizer(mmap=True)
 # An analyzer need 3 parameters, which are: char_filters, tokenizer, token_filters
 a = Analyzer([UnicodeNormalizeCharFilter()], t, [POSStopFilter(['記号']), ExtractAttributeFilter('surface')])
 
+
+# Split text into words, only remove punctuation.
 def split_words(text):
-    for word in a.analyze(text):
-        print(word)
-    return 
+    return list(a.analyze(text))
