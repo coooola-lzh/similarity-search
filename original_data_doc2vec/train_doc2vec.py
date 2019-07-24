@@ -24,12 +24,12 @@ data = 'url_text.dat'
 def read_corpus(fname):
     with smart_open.open(fname, encoding='utf-8') as f:
         i = 0
-        if i and i % 10 == 0:
-            print('Finished loading {} docs.\n'.format(i))
         for line in f:
+            if i and i % 10 == 0:
+                print('Finished loading {} docs.\n'.format(i), flush=True)
             url, *text = line.split()
             text = ''.join(text)
-            url_to_i[url], i_to_url= i, url
+            url_to_i[url], i_to_url[i]= i, url
             yield gensim.models.doc2vec.TaggedDocument(split_words(text), [i])
             i += 1
 
@@ -64,7 +64,7 @@ def main():
 
     # Start training
     print("Start to train the model\n", flush=True)
-    model = gensim.models.doc2vec.Doc2Vec(vector_size=100, min_count=5, epoch=20, callbacks=[epoch_logger, epoch_saver])
+    model = gensim.models.doc2vec.Doc2Vec(vector_size=100, min_count=5, epochs=20, callbacks=[epoch_logger, epoch_saver])
     model.build_vocab(train_corpus)
 
     t1 = time.time()
