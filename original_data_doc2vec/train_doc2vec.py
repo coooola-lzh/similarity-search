@@ -11,6 +11,10 @@ import sys
 from callback import EpochLogger, EpochSaver
 from split_words import split_words
 
+# Expand path for imported python modules
+sys.path.append('../')
+
+
 url_to_i, i_to_url  = {}, {}
 data = 'url_text.dat'
 
