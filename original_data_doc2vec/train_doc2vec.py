@@ -11,7 +11,6 @@ import sys
 
 # Expand path for imported python modules
 sys.path.append('..')
-print(sys.path)
 
 from callback import EpochLogger, EpochSaver
 from split_words import split_words
@@ -24,6 +23,8 @@ data = 'url_text.dat'
 
 def read_corpus(fname):
     with smart_open.open(fname, encoding='utf-8') as f:
+        if i and i % 10 == 0:
+            print('Finished loading {} docs.\n'.format(i))
         i = 0
         for line in f:
             url, *text = line.split()
@@ -34,11 +35,11 @@ def read_corpus(fname):
 
 def main():
     # Load corpus and build url-to-index, index-to-url dictionaries.
-    print('Start to load the corpus, building url-to-index and indedx-to-url dictionaries simultaneously\n', flush=True)
+    print('Start to load the corpus, building url-to-index and index-to-url dictionaries simultaneously.\n', flush=True)
     t1 = time.time()
     train_corpus = list(read_corpus(data))
     t2 = time.time()
-    print('Loading corpus finished, took {:.3f}\n'.format(t2 - t1), flush=True)
+    print('Loading corpus finished, took {:.3f} secs.\n'.format(t2 - t1), flush=True)
     
     # Save the u-to-i and i-to-u dictionaries with pickling.
     with open('model/url_to_i', 'wb') as f:
